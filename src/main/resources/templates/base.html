@@ -13,15 +13,25 @@
         <td><b>Name</b></td>
         <td><b>Description</b></td>
         <td><b>Price</b></td>
-        <td colspan="3"><b>Action</b></td>
+        <td colspan="2"><b>Action</b></td>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="item : ${item}">
+    <tr th:each="item : ${items}">
         <td th:text="${item.id}"></td>
         <td th:text="${item.name}"></td>
         <td th:text="${item.description}"></td>
         <td th:text="${item.price}"></td>
+        <td>
+            <form th:method="post" th:action="@{'/add/'+${item.id}}">
+                <input type="submit" value="Add to Cart">
+            </form>
+        </td>
+        <td>
+            <form th:method="delete" th:action="@{'/delItem/'+${item.id}}">
+                <input type="submit" value="Delete to Item">
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
@@ -36,7 +46,7 @@
             <td><b>Name</b></td>
             <td><b>Description</b></td>
             <td><b>Quantity</b></td>
-            <td colspan="3"><b>Action</b></td>
+            <td colspan="2"><b>Action</b></td>
         </tr>
         </thead>
         <tbody>
@@ -45,6 +55,16 @@
             <td th:text="${cartItem.item.name}"></td>
             <td th:text="${cartItem.item.description}"></td>
             <td th:text="${cartItem.quantity}"></td>
+            <td>
+                <form th:method="delete" th:action="@{'/delCartCount/'+${cartItem.item.id}}">
+                    <input type="submit" value="Delete to Cart Count">
+                </form>
+            </td>
+            <td>
+                <form th:method="delete" th:action="@{'/delCartAll/'+${cartItem.item.id}}">
+                    <input type="submit" value="Delete to Cart">
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
